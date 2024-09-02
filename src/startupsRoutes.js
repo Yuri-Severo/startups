@@ -1,17 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const {getFirstFive,getLastFive,getById,registerNew,editById,deleteById} = require('./controllers/startupController')
+const StartupController = require("./controllers/StartupController");
 
-router.get("/", getFirstFive);
-
-router.get("/new_startups", getLastFive);
-
-router.get("/startups/:id", getById);
-
-router.post("/register_startup", registerNew);
-
-router.put("/edit_startup/:id", editById);
-
-router.delete("/delete_startup/:id", deleteById);
+router.get("/startups/:id", StartupController.getOne);
+router.get("/startups", StartupController.getFirst);
+router.get("/startups/recent", StartupController.getRecent);
+router.post("/startups", StartupController.createOne);
+router.put("/startups/:id", StartupController.updateOne);
+router.delete("/startups/:id", StartupController.deleteOne);
 
 module.exports = router;
