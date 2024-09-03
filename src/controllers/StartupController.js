@@ -1,62 +1,77 @@
-const Startup = require("../models/startup");
-const {
-  getOne,
-  getFirst,
-  getRecent,
-  registerOne,
-  updateOne,
-  deleteOne,
-} = require("../services/StartupService");
+const StartupService = require("../services/StartupService");
 
 const StartupController = {
+  async getAll(req, res, next) {
+    try {
+      const startups = await StartupService.getAll();
+      if (!startups) {
+        return res.status(404).json({ message: "Startups not found" });
+      }
+      return res.status(200).json(startups);
+    } catch (error) {
+      next(error);
+    }
+  },
   async getOne(req, res, next) {
     try {
-      const startup = await getOne(req.params.id);
-      return res.send(startup);
+      const startup = await StartupService.getOne(req.params.id);
+      if (!startup) {
+        return res.status(404).json({ message: "Startup not found" });
+      }
+      return res.status(200).json(startup);
     } catch (error) {
       next(error);
     }
   },
-  //needs updates
+
   async getFirst(req, res, next) {
     try {
-      const startup = await getFirst(req.params.id);
-      return res.send(startup);
+      const startup = await StartupService.getFirst();
+      if (!startup) {
+        return res.status(404).json({ message: "Startup not found" });
+      }
+      return res.status(200).json(startup);
     } catch (error) {
       next(error);
     }
   },
-  //################################################
-  //needs updates
-  async getRecent(req, res, next) {
+
+  async registerOne(req, res, next) {
     try {
-      const startup = await getRecent(req.params.id);
-      return res.send(startup);
+      const startup = await StartupService.registerOne(req.body);
+      return res
+        .status(201)
+        .json({ message: "Startup registerd succesfully", startup });
     } catch (error) {
+      if (error.name === "ValidationError") {
+        return res.status(400).json({ message: error.message });
+      }
       next(error);
     }
   },
-  //################################################
-  async createOne(req, res, next) {
-    try {
-      const startup = await registerOne(req.body);
-      return res.send(startup);
-    } catch (error) {
-      next(error);
-    }
-  },
+
   async updateOne(req, res, next) {
     try {
-      const startup = await updateOne(req.params.id, req.body);
-      return res.send(startup);
+      const startup = await StartupService.updateOne(req.params.id, req.body);
+      if (!startup) {
+        return res.status(404).json({ message: "Startup not found" });
+      }
+      return res.status(200).json(startup);
     } catch (error) {
+      if (error.name === "ValidationError") {
+        return res.status(400).json({ message: error.message });
+      }
       next(error);
     }
   },
+
   async deleteOne(req, res, next) {
     try {
-      const resultado = await deleteOne(req.params.id);
-      return res.send(resultado);
+      const resultado = await StartupService.deleteOne(req.params.id);
+      if (!resultado) {
+        return res.status(404).json({ message: "Startup not found" });
+      }
+      return res.status(200).json({ message: "Startup deleted succesfully" });
     } catch (error) {
       next(error);
     }
