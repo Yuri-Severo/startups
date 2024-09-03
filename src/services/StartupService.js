@@ -1,15 +1,14 @@
 const Startup = require("../models/startup");
 
 const StartupService = {
+  async getAll() {
+    return await Startup.find();
+  },
   async getOne(id) {
-    return await Startup.findById();
+    return await Startup.findById(id);
   },
-  //needs updates
   async getFirst(q) {
-    return await Startup.find();
-  },
-  async getRecent(q) {
-    return await Startup.find();
+    return await Startup.find().limit(5);
   },
   async registerOne(data) {
     const newStartup = new Startup({
