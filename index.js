@@ -1,6 +1,6 @@
 const express = require("express");
 const dbConnection = require("./config/dbConnection");
-const startupsRoutes = require("./src/startupsRoutes");
+const startupsRoutes = require("./src/routes/startupsRoutes");
 
 require("dotenv").config();
 dbConnection();
