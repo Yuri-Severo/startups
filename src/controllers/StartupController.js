@@ -25,6 +25,7 @@ const StartupController = {
   },
 
   async registerOne(req, res, next) {
+    console.log('chegou aqui');
     try {
       const startup = await StartupService.registerOne(req.body);
       return res
