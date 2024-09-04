@@ -1,5 +1,5 @@
 const express = require("express");
-const StartupController = require("../controllers/startupController");
+const StartupController = require("../controllers/StartupController");
 const router = express.Router();
 
 router.get(
@@ -10,10 +10,7 @@ router.get(
     "/startup/:id",
     StartupController.getOne
 );
-router.get(
-    "/startups",
-    StartupController.getFirst
-);
+
 router.post(
   "/startups",
   StartupController.registerOne
