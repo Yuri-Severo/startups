@@ -24,18 +24,6 @@ const StartupController = {
     }
   },
 
-  async getFirst(req, res, next) {
-    try {
-      const startup = await StartupService.getFirst();
-      if (!startup) {
-        return res.status(404).json({ message: "Startup not found" });
-      }
-      return res.status(200).json(startup);
-    } catch (error) {
-      next(error);
-    }
-  },
-
   async registerOne(req, res, next) {
     try {
       const startup = await StartupService.registerOne(req.body);
