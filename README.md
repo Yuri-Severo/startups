@@ -9,7 +9,7 @@ Biliotecas e outros, podem ser encontrados no "package.json"
  
 - Inicialização e configuração de ambiente:
 Esta API está configurada para se conectar com o meu banco de dados privado no MongoDB Atlas, caso deseje utilizar, baixe o arquivo
-startup_data.csv, importe para um cluster seu no MongoDB Atlas e substitua a variável "process.env.MONGO_URI" presento no arquivo
+startup_data.csv, importe para um cluster seu no MongoDB Atlas e substitua a variável "process.env.MONGO_URI" presente no arquivo
 "backend/config/dbConnection.js" pelo link de conexão com o seu banco de dados.
 
 Após conectar com o banco de dados, para que a API seja inicializada, certifique-se de abrir o terminal na pasta "backend"
