@@ -1,61 +1,99 @@
-Esta é uma API Rest, desenvolvida para interagir com um banco de dados com informações de diversas startups. 
 
-- Tecnologias e Ferramentas utilizadas:
-Banco de dados: MongoDB (Atlas)
-Ferramenta de teste: Insomnia
-Linguagem de programação: JavaScript
-Motor de compilação: NodeJS
-Biliotecas e outros, podem ser encontrados no "package.json"
- 
-- Inicialização e configuração de ambiente:
-Esta API está configurada para se conectar com o meu banco de dados privado no MongoDB Atlas, caso deseje utilizar, baixe o arquivo
-startup_data.csv, importe para um cluster seu no MongoDB Atlas e substitua a variável "process.env.MONGO_URI" presente no arquivo
-"backend/config/dbConnection.js" pelo link de conexão com o seu banco de dados.
+# Startup Database API
 
-Após conectar com o banco de dados, para que a API seja inicializada, certifique-se de abrir o terminal na pasta "backend"
-insira o comando "npm install" para instalar as dependências
-insira "npm run dev" para iniciar a aplicação
+Esta é uma API Rest desenvolvida para interagir com um banco de dados contendo informações sobre diversas startups.
 
-Ocorrendo tudo bem, as mensagens aparecerão no terminal:
-"Server running on port 5000"
-"DataBase connected"
+## Tecnologias e Ferramentas Utilizadas
 
-- Funções de manipulação de Usuários:
-POST (REGISTER USER): http://localhost:5000/user/register
-POST (LOGIN USER): http://localhost:5000/user/login
-GET (ALL USERS): http://localhost:5000/users
-DEL (DELETE ONE): http://localhost:5000/user/:id
+- **Banco de Dados:** MongoDB (Atlas)
+- **Ferramenta de Teste:** Insomnia
+- **Linguagem de Programação:** JavaScript
+- **Motor de Execução:** Node.js
+- **Dependências:** Veja o arquivo `package.json` para uma lista completa de bibliotecas e ferramentas.
 
-Corpo modelo para POST:
+## Inicialização e Configuração de Ambiente
+
+Esta API está configurada para se conectar ao meu banco de dados privado no MongoDB Atlas. Caso deseje utilizá-la, siga os seguintes passos:
+
+1. Baixe o arquivo `startup_data.csv` e importe-o para o seu próprio cluster no MongoDB Atlas.
+2. Substitua o valor da variável `process.env.MONGO_URI` no arquivo `backend/config/dbConnection.js` pelo link de conexão com o seu banco de dados.
+
+### Passos para Iniciar a API
+
+1. No terminal, navegue até a pasta `backend` do projeto.
+2. Execute o comando `npm install` para instalar todas as dependências.
+3. Execute `npm run dev` para iniciar a aplicação em modo de desenvolvimento.
+
+Se tudo estiver correto, você verá as seguintes mensagens no terminal:
+
+- `Server running on port 5000`
+- `Database connected`
+
+## Endpoints de Usuários
+
+### Cadastro de Usuário (POST)
+
+**Endpoint:** `http://localhost:5000/user/register`
+
+### Login de Usuário (POST)
+
+**Endpoint:** `http://localhost:5000/user/login`
+
+### Listar Todos os Usuários (GET)
+
+**Endpoint:** `http://localhost:5000/users`
+
+### Deletar um Usuário (DELETE)
+
+**Endpoint:** `http://localhost:5000/user/:id`
+
+#### Corpo de Exemplo para POST:
+
+```json
 {
   "username": "username",
   "password": "password",
-  "role": "user" ou "admin" (necessário somente no register)
+  "role": "user ou admin" --(necessário apenas no cadastro)
 }
+```
 
-Observação:
-No login o usuário envia um json com suas informações ("username" e "password") e é retornado um token, o qual deve ser utilizado na ferramenta de teste 
-no campo de autenticação "Bearer Token" de cada requisição HTTP. De acordo com a "role" do usuário, o token permite acesso à funções restritas,
-o "user" tem acesso aos get's das startups e o "admin" à todas as funções. Sem o token, não é possível realizar nenhuma função, obrigando o registro
-e login para o uso da API.
+**Observação:** Após o login, o usuário receberá um token que deve ser utilizado no campo de autenticação "Bearer Token" de cada requisição HTTP. Dependendo da função (role) do usuário, o token permitirá acesso a funções restritas. Usuários com role "user" têm acesso apenas aos GETs das startups, enquanto usuários com role "admin" têm acesso a todas as funções. O token é obrigatório para todas as operações, exceto para registro e login.
 
+## Endpoints de Startups
 
-- Funções de manipulação do Banco de Dados:
-GET (ALL): http://localhost:5000/startups/all
-GET (ONE): http://localhost:5000/startup/:id
-POST (REGISTER ONE): http://localhost:5000/startups
-PUT (UPDATE ONE): http://localhost:5000/startups/:id
-DEL (DELETE ONE): http://localhost:5000/startups/:id
+### Listar Todas as Startups (GET)
 
-Corpo modelo para POST e PUT:
+**Endpoint:** `http://localhost:5000/startups/all`
+
+### Obter uma Startup (GET)
+
+**Endpoint:** `http://localhost:5000/startup/:id`
+
+### Registrar uma Startup (POST)
+
+**Endpoint:** `http://localhost:5000/startups`
+
+### Atualizar uma Startup (PUT)
+
+**Endpoint:** `http://localhost:5000/startups/:id`
+
+### Deletar uma Startup (DELETE)
+
+**Endpoint:** `http://localhost:5000/startups/:id`
+
+#### Corpo de Exemplo para POST e PUT:
+
+```json
 {
-		"name": "nome da startup",
-		"state_code": "SC",
-		"city": "cidade",
-		"founded_at": "dd-mm-aaaa",
-		"category_code": "categoria",
-		"status": "acquired" ou "closed",
+  "name": "nome da startup",
+  "state_code": "SC",
+  "city": "cidade",
+  "founded_at": "dd-mm-aaaa",
+  "category_code": "categoria",
+  "status": "acquired ou closed"
 }
+```
 
-Este projeto foi inteiramente realizado por mim, Yuri Severo.
+## Autor
 
+Este projeto foi inteiramente desenvolvido por **Yuri Severo**.
