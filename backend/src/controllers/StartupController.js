@@ -25,7 +25,6 @@ const StartupController = {
   },
 
   async registerOne(req, res, next) {
-    console.log('chegou aqui');
     try {
       const startup = await StartupService.registerOne(req.body);
       return res
@@ -56,8 +55,8 @@ const StartupController = {
 
   async deleteOne(req, res, next) {
     try {
-      const resultado = await StartupService.deleteOne(req.params.id);
-      if (!resultado) {
+      const result = await StartupService.deleteOne(req.params.id);
+      if (!result) {
         return res.status(404).json({ message: "Startup not found" });
       }
       return res.status(200).json({ message: "Startup deleted succesfully" });

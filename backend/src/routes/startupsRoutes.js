@@ -1,35 +1,35 @@
 const express = require("express");
 const StartupController = require("../controllers/StartupController");
 const router = express.Router();
-const authMiddleware = require("../middleware/authMiddleware");
+const UserMiddleware = require("../middlewares/UserMiddleware");
 router.get(
-    "/startups/all",
-    authMiddleware.authenticate,
-    StartupController.getAll
+  "/startups/all",
+  UserMiddleware.authenticate,
+  StartupController.getAll
 );
 router.get(
-    "/startup/:id",
-    authMiddleware.authenticate,
-    StartupController.getOne
+  "/startup/:id",
+  UserMiddleware.authenticate,
+  StartupController.getOne
 );
 
 router.post(
   "/startups",
-  authMiddleware.authenticate,
-  authMiddleware.authorize('admin'),
+  UserMiddleware.authenticate,
+  UserMiddleware.authorize("admin"),
   StartupController.registerOne
 );
 router.put(
   "/startups/:id",
-  authMiddleware.authenticate,
-  authMiddleware.authorize('admin'),
+  UserMiddleware.authenticate,
+  UserMiddleware.authorize("admin"),
   StartupController.updateOne
 );
 router.delete(
   "/startups/:id",
-  authMiddleware.authenticate,
-  authMiddleware.authorize('admin'),
-  StartupController.deleteOne,
+  UserMiddleware.authenticate,
+  UserMiddleware.authorize("admin"),
+  StartupController.deleteOne
 );
 
 module.exports = router;
